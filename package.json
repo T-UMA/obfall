@@ -1,22 +1,32 @@
 {
   "name": "u-ma_work_tmp",
   "version": "1.0.0",
-  "description": "uma_work_tmp",
+  "description": "matroos",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "dev": "webpack && webpack server"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NakamuraHiroki2465/UMA_work_tmp.git"
+    "url": "git+https://github.com/NakamuraHiroki2465/matroos.git"
   },
   "author": "nakamura hiroki",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/NakamuraHiroki2465/UMA_work_tmp/issues"
+    "url": "https://github.com/NakamuraHiroki2465/matroos/issues"
   },
-  "homepage": "https://github.com/NakamuraHiroki2465/UMA_work_tmp#readme",
+  "homepage": "https://github.com/NakamuraHiroki2465/matroos#readme",
   "dependencies": {
-    "@sendgrid/mail": "^7.7.0"
+    "@sendgrid/mail": "^7.7.0",
+    "autoprefixer": "^10.4.7",
+    "postcss": "^8.4.14",
+    "tailwindcss": "^3.1.4"
+  },
+  "devDependencies": {
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.9.2"
   }
 }
