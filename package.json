@@ -1,5 +1,5 @@
 {
-  "name": "u-ma_work_tmp",
+  "name": "matroos",
   "version": "1.0.0",
   "description": "matroos",
   "main": "index.js",
@@ -21,6 +21,7 @@
   "dependencies": {
     "@sendgrid/mail": "^7.7.0",
     "autoprefixer": "^10.4.7",
+    "jquery": "^3.6.0",
     "postcss": "^8.4.14",
     "tailwindcss": "^3.1.4"
   },

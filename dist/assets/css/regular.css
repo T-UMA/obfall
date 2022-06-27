@@ -1,0 +1,14 @@
+.scroll-bottom {
+    position:relative;
+    height:13.3vw;
+    overflow:hidden;
+}
+.scroll-bottom::before {
+    content: '';
+    position:absolute;
+    width:1px;
+    height:13.3vw;
+    background-color:black;
+    left:50%;
+    transform:translateX(-50%);
+}
