@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "dev": "webpack && webpack server"
+    "dev": "webpack server"
   },
   "repository": {
     "type": "git",
@@ -21,7 +20,6 @@
   "dependencies": {
     "@sendgrid/mail": "^7.7.0",
     "autoprefixer": "^10.4.7",
-    "jquery": "^3.6.0",
     "postcss": "^8.4.14",
     "tailwindcss": "^3.1.4"
   },
