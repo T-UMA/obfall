@@ -6,6 +6,9 @@ body {
 #other-ambition li:hover {
     cursor:pointer;
 }
+#profile-text {
+    width:120px;
+}
 
 /**
 * アニメーション関係

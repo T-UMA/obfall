@@ -11,7 +11,7 @@ $(function() {
       let scroll = $(window).scrollTop();
       let blockPosition = $(this).offset().top;
       let windowHeihgt = $(window).height();
-      if (scroll > blockPosition - windowHeihgt + 150) {
+      if (scroll > blockPosition - windowHeihgt + 100) {
         $(this).addClass("block-in");
       }
     });
