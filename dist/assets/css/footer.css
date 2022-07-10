@@ -1,0 +1,36 @@
+.footer {
+  background: #404D5F;
+  height: 400px;
+  color: #EFEFEF;
+}
+
+.footerwrapper {
+  padding: 11% 15% ;
+  display: flex;
+
+}
+
+.footerwrapper :last-of-type{
+  margin-left: auto;
+}
+
+
+.footerlist a{
+  line-height: 2em;
+
+}
+
+.footerlist {
+  border-left:0.5px solid #EFEFEF; /*線の設定*/
+  padding:5px 35px; /*余白の設定*/
+  font-size: 16px;
+}
+
+.companyname {
+  font-size: 24px;
+}
+
+.footerlist :hover {
+  color: #FFCD9D;
+
+}
