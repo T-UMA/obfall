@@ -1,11 +1,10 @@
 .footer {
   background: #404D5F;
-  height: 400px;
   color: #EFEFEF;
 }
 
 .footerwrapper {
-  padding: 11% 15% ;
+  padding: 10%;
   display: flex;
 
 }
@@ -32,5 +31,16 @@
 
 .footerlist :hover {
   color: #FFCD9D;
+} 
 
+@media screen and (max-width: 640px) {
+  .footerlist {
+    padding:5px 10px;
+    min-width:150px; 
+  }
+  .companyname {
+    padding: 5px 0;
+    font-size:16px;
+    line-height:2em; 
+  }
 }

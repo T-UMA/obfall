@@ -16,13 +16,7 @@ $(function() {
       }
     });
   });
-  /**
-   * マウスホイールでスクロール時のスクロール量を調整する
-   */
-  $('#scroll-induction, #interview-content-1, #interview-content-2, #interview-content-3, #interview-ambition, #other-ambition, #footer').inertiaScroll({
-    parent: $("#wrap"),
-    childDelta1	: 0.02
-  }); 
+
 });
 
 /**

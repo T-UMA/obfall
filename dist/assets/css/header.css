@@ -122,7 +122,6 @@ span {
   .headerwrapper {
     background: linear-gradient(to bottom, #FFCD9D, #404D5F);
     position: fixed;
-    z-index: 80;
   }
 
 }
@@ -169,7 +168,6 @@ span {
   .headerwrapper {
     background: linear-gradient(to bottom, #FFCD9D, #404D5F);
     position: fixed;
-    z-index: 80;
   }
 
 }
@@ -216,13 +214,9 @@ span {
   .headerwrapper {
     background: linear-gradient(to bottom, #FFCD9D, #404D5F);
     position: fixed;
-    z-index: 80;
   }
 
 }
-
-
-
 
 
 /*ボタン*/
@@ -236,7 +230,7 @@ span {
   width: 60px;
   justify-content: center;
   align-items: center;
-  z-index: 90;
+  z-index: 102;
   cursor: pointer;
 }
 
@@ -279,8 +273,9 @@ span {
 }
 
 .headerwrapper {
-  transform:translateX(100%);
+  transform:translateX(102%);
   transition: transform 0.3s ease-in;  
+  z-index:101;
 }
 
 #menu-btn-check:checked ~ .headerwrapper {
