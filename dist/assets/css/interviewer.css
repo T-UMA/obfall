@@ -1,0 +1,137 @@
+body {
+    margin: 0;
+}
+
+.listContainer {
+    background: linear-gradient(to right, #404D5F, #FFCD9D);
+    background-size: cover;
+    min-height:100vh;
+    width: 100%;
+}
+
+.title {
+    display: flex;
+    align-items: flex-end;
+    flex-basis: 10px;
+    padding: 10% 0;
+    width: 800px;
+    margin: 0 auto
+}
+
+.title_h1 {
+    color:  #EFEFEF;
+    font-size: 2em;
+    line-height: 2em;
+}
+
+.nameWrapper {
+    display: flex;
+    flex-flow: row wrap;
+    column-gap: 4em;
+    width: 800px;
+    margin: 0 auto;
+}
+
+.nameList {
+    display: flex;
+    align-items: flex-end;
+    margin: 30px 0;
+}
+
+.pic {
+    width: 45px;
+    transition: 0.5s;
+}
+
+.name {
+    display: flex;
+    font-size: 1.5em;
+    left: 18%;
+    color: #EFEFEF;
+    margin-left: -6%;
+}
+
+.eigo {
+    margin-left: 10px;
+}
+
+span {
+    color: #2F384F;
+}
+
+.pic :hover {
+    opacity: 0.5;
+}
+
+/*ipad*/
+@media (max-width: 960px ) {
+    .title {
+        width: 600px;
+        margin: 0 auto;
+    }
+    .title_h1 {
+        font-size: 1.5em;
+        line-height:1.5em;
+    }
+
+    .nameWrapper {
+        width: 600px;
+        margin: 0 auto;
+        column-gap: 0em;
+    }
+
+    .nameList {
+        margin: 30px 30px 50px 0px;
+    }
+
+    .name {
+        font-size: 1.4em;
+    }
+
+    .pic {
+        width: 45px;
+    }
+
+    .listContainer {
+        background: linear-gradient(to bottom, #FFCD9D, #404D5F);
+        position: fixed;
+        z-index: 80;
+    }
+
+}
+
+/*iphone*/
+@media (max-width: 670px ) {
+    .title {
+        width:300px;
+        margin: 0 auto;
+    }
+
+    .title_h1 {
+        font-size: 1.2em;
+        line-height:1.2em;
+    }
+
+    .nameWrapper {
+        margin: 0 auto;
+        width: 300px;
+    }
+
+    .nameList {
+        margin: 30px 0 30px 0;
+    }
+
+    .name {
+        font-size: 1.3em;
+    }
+
+    .pic {
+        width: 37px;
+    }
+
+    .listContainer {
+        background: linear-gradient(to bottom, #FFCD9D, #404D5F);
+        position: fixed;
+        z-index: 80;
+    }
+}
