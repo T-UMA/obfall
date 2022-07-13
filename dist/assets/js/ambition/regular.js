@@ -24,4 +24,20 @@ $(function() {
  */
 const toOtherPerson = function(index) {
   window.location.href=`interview0${index}.html`;
-};   
+};  
+
+
+const sendMail = function(mail) {
+    const URL = `https://www.matroos.com/.netlify/functions/mail}`;
+    return $.get(URL, {mail: mail})
+    .then(({ data: data }) => {
+      if (data.status) {
+          window.location.href="../../contact/complete.html"
+      } else {
+        window.location.href="../../contact/fail.html"
+      }
+    })
+    .catch((_e) => {
+        window.location.href="../../contact/fail.html"
+    })
+}

@@ -4,8 +4,8 @@
   "description": "matroos",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack server"
+    "api": "netlify-lambda serve src --port 9001",
+    "build": "netlify-lambda build src"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,9 @@
   "dependencies": {
     "@sendgrid/mail": "^7.7.0",
     "autoprefixer": "^10.4.7",
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
+    "netlify-lambda": "^2.0.15",
     "postcss": "^8.4.14",
     "tailwindcss": "^3.1.4"
   },
