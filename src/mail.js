@@ -2,10 +2,10 @@ require('dotenv').config();
 const sgMail = require('@sendgrid/mail');
 
 exports.handler = async (event, _context) => {
-  const {httpMethod, body, isBase64Encoded} = event
+  const {httpMethod, body} = event
 
-  console.log(event)
-  if (!checkRequestParameter(httpMethod, body, isBase64Encoded)) {
+  if (!checkRequestParameter(httpMethod, body)) {
+    console.warn(`リクエストデータの値が不正です。${event}`);
     return {
       statusCode:400
     }
@@ -31,18 +31,20 @@ exports.handler = async (event, _context) => {
   };
   try {
     await sgMail.send(msg);
+    console.warn("メール送信が成功しました");
     return {
       statusCode:200
     }
   } catch (error) {
+    console.warn(`メール送信に失敗しました。${event}`);
     return {
       statusCode:500
     }
   }
 }
 
-const checkRequestParameter = (httpMethod,body,isBase64Encoded) => {
-  return httpMethod === 'POST' && isBase64Encoded && body.name && body.text && checkMailAddress(body.replyTo)
+const checkRequestParameter = (httpMethod,body) => {
+  return httpMethod === 'POST' && body.name && body.text && checkMailAddress(body.replyTo)
 }
 
 const checkMailAddress = (mail) => {
