@@ -3,14 +3,15 @@ const sgMail = require('@sendgrid/mail');
 
 exports.handler = async (event, _context) => {
   const {httpMethod, body} = event
-  console.log()
-  if (!checkRequestParameter(httpMethod, body)) {
+  console.log(body);
+  console.log(body.data);
+  if (!checkRequestParameter(httpMethod, body.data)) {
     console.warn(`リクエストデータの値が不正です。
     {
       httpMethod: ${httpMethod},
-      replyTo: ${body.replyTo},
-      name: ${body.name},
-      text: ${body.text}
+      replyTo: ${body.data.replyTo},
+      name: ${body.data.name},
+      text: ${body.data.text}
     }`);
     return {
       statusCode:400
