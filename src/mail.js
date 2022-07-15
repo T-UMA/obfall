@@ -3,9 +3,15 @@ const sgMail = require('@sendgrid/mail');
 
 exports.handler = async (event, _context) => {
   const {httpMethod, body} = event
-
+  console.log()
   if (!checkRequestParameter(httpMethod, body)) {
-    console.warn(`リクエストデータの値が不正です。${httpMethod,body.replyTo,body.name,body.text}`);
+    console.warn(`リクエストデータの値が不正です。
+    {
+      httpMethod: ${httoMethod},
+      replyTo: ${body.replyTo},
+      name: ${body.name},
+      text: ${body.text}
+    }`);
     return {
       statusCode:400
     }
@@ -36,11 +42,17 @@ exports.handler = async (event, _context) => {
       statusCode:200
     }
   } catch (error) {
-    console.warn(`メール送信に失敗しました。${httpMethod,body.replyTo,body.name,body.text}`);
+    console.warn(`メール送信に失敗しました。
+    {
+      httpMethod: ${httoMethod},
+      replyTo: ${body.replyTo},
+      name: ${body.name},
+      text: ${body.text}
+    }`);
     return {
       statusCode:500
     }
-  }
+  } 
 }
 
 const checkRequestParameter = (httpMethod,body) => {
