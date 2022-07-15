@@ -7,7 +7,7 @@ exports.handler = async (event, _context) => {
   if (!checkRequestParameter(httpMethod, body)) {
     console.warn(`リクエストデータの値が不正です。
     {
-      httpMethod: ${httoMethod},
+      httpMethod: ${httpMethod},
       replyTo: ${body.replyTo},
       name: ${body.name},
       text: ${body.text}
@@ -44,7 +44,7 @@ exports.handler = async (event, _context) => {
   } catch (error) {
     console.warn(`メール送信に失敗しました。
     {
-      httpMethod: ${httoMethod},
+      httpMethod: ${httpMethod},
       replyTo: ${body.replyTo},
       name: ${body.name},
       text: ${body.text}
