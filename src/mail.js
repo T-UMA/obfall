@@ -2,16 +2,16 @@ require('dotenv').config();
 const sgMail = require('@sendgrid/mail');
 
 exports.handler = async (event, _context) => {
-  const {httpMethod, body} = event
-  console.log(body);
-  console.log(body.data);
-  if (!checkRequestParameter(httpMethod, body.data)) {
+  const {httpMethod} = event
+  const body = JSON.parse(event.body);
+  console.log(JSON.parse(body));
+  if (!checkRequestParameter(httpMethod, body)) {
     console.warn(`リクエストデータの値が不正です。
     {
       httpMethod: ${httpMethod},
-      replyTo: ${body.data.replyTo},
-      name: ${body.data.name},
-      text: ${body.data.text}
+      replyTo: ${body.replyTo},
+      name: ${body.name},
+      text: ${body.text}
     }`);
     return {
       statusCode:400
