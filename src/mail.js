@@ -5,7 +5,7 @@ exports.handler = async (event, _context) => {
   const {httpMethod, body} = event
 
   if (!checkRequestParameter(httpMethod, body)) {
-    console.warn(`リクエストデータの値が不正です。${event}`);
+    console.warn(`リクエストデータの値が不正です。${httpMethod,body.replyTo,body.name,body.text}`);
     return {
       statusCode:400
     }
@@ -36,7 +36,7 @@ exports.handler = async (event, _context) => {
       statusCode:200
     }
   } catch (error) {
-    console.warn(`メール送信に失敗しました。${event}`);
+    console.warn(`メール送信に失敗しました。${httpMethod,body.replyTo,body.name,body.text}`);
     return {
       statusCode:500
     }
@@ -48,5 +48,7 @@ const checkRequestParameter = (httpMethod,body) => {
 }
 
 const checkMailAddress = (mail) => {
-  return '^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$'.test(mail)
+  const result =  '^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$'.test(mail)
+  !result || console.warn(`メールアドレスのチェック結果が不正です${mail}`)  
+  return result
 }
