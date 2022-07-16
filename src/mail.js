@@ -2,6 +2,8 @@ require('dotenv').config();
 const sgMail = require('@sendgrid/mail');
 
 exports.handler = async (event, _context) => {
+  console.log(event);
+  
   const {httpMethod} = event
   const body = JSON.parse(event.body);
   console.log(JSON.parse(body));
@@ -51,7 +53,11 @@ exports.handler = async (event, _context) => {
       text: ${body.text}
     }`);
     return {
-      statusCode:500
+      statusCode:500,
+      headers: {
+        "Access-Control-Allow-Origin":"*",
+        "Access-Control-Allow-Headers":"Content-Type"
+      }
     }
   } 
 }
