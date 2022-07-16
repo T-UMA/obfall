@@ -77,6 +77,6 @@ const checkRequestParameter = (httpMethod,params) => {
 const checkMailAddress = (mail) => {  
   const regExp = new RegExp('^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$');
   const result =  regExp.test(mail)
-  !result || console.warn(`メールアドレスのチェック結果が不正です${mail}`)  
+  result || console.warn(`メールアドレスのチェック結果が不正です${mail}`)  
   return result
 }
