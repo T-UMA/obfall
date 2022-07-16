@@ -1,12 +1,12 @@
 require('dotenv').config();
-const querystring = require('querystring')
 const sgMail = require('@sendgrid/mail');
 
 exports.handler = async (event, _context) => {
-  console.log(event);
-  
   const {httpMethod} = event
-  const params = querystring.parse(event.body);
+  let body = event.body
+  body.replace('/\'/g',"\"");
+  console.log(body);
+  const params = JSON.parse(body);
   if (!checkRequestParameter(httpMethod, params)) {
     console.warn(`リクエストデータの値が不正です。
     {
