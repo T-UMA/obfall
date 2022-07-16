@@ -5,23 +5,22 @@ exports.handler = async (event, _context) => {
   console.log(event);
   
   const {httpMethod} = event
-  const body = JSON.parse(event.body);
-  console.log(JSON.parse(body));
-  if (!checkRequestParameter(httpMethod, body)) {
+  const params = querystring.parse(event.body);
+  if (!checkRequestParameter(httpMethod, params)) {
     console.warn(`リクエストデータの値が不正です。
     {
       httpMethod: ${httpMethod},
-      replyTo: ${body.replyTo},
-      name: ${body.name},
-      text: ${body.text}
+      replyTo: ${params.replyTo},
+      name: ${params.name},
+      text: ${params.text}
     }`);
     return {
       statusCode:400
     }
   } 
-  const name = body.name
-  const replyTo = body.replyTo
-  const text = body.text
+  const name = params.name
+  const replyTo = params.replyTo
+  const text = params.text
   const content = 
   `
   <p style="font-weight:bold">${name}さんからお問い合わせが来ました</p>
@@ -48,9 +47,9 @@ exports.handler = async (event, _context) => {
     console.warn(`メール送信に失敗しました。
     {
       httpMethod: ${httpMethod},
-      replyTo: ${body.replyTo},
-      name: ${body.name},
-      text: ${body.text}
+      replyTo: ${params.replyTo},
+      name: ${params.name},
+      text: ${params.text}
     }`);
     return {
       statusCode:500,
@@ -62,8 +61,8 @@ exports.handler = async (event, _context) => {
   } 
 }
 
-const checkRequestParameter = (httpMethod,body) => {
-  return httpMethod === 'POST' && body.name && body.text && checkMailAddress(body.replyTo)
+const checkRequestParameter = (httpMethod,params) => {
+  return httpMethod === 'POST' && params.name && params.text && checkMailAddress(params.replyTo)
 }
 
 const checkMailAddress = (mail) => {
