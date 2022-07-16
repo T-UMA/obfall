@@ -16,7 +16,11 @@ exports.handler = async (event, _context) => {
       text: ${params.text}
     }`);
     return {
-      statusCode:400
+      statusCode:400,
+      headers: {
+        "Access-Control-Allow-Origin":"*",
+        "Access-Control-Allow-Headers":"Content-Type"
+      }
     }
   } 
   const name = params.name
@@ -42,7 +46,11 @@ exports.handler = async (event, _context) => {
     await sgMail.send(msg);
     console.warn("メール送信が成功しました");
     return {
-      statusCode:200
+      statusCode:200,
+      headers: {
+        "Access-Control-Allow-Origin":"*",
+        "Access-Control-Allow-Headers":"Content-Type"
+      }
     }
   } catch (error) {
     console.warn(`メール送信に失敗しました。
@@ -53,7 +61,11 @@ exports.handler = async (event, _context) => {
       text: ${params.text}
     }`);
     return {
-      statusCode:500
+      statusCode:500,
+      headers: {
+        "Access-Control-Allow-Origin":"*",
+        "Access-Control-Allow-Headers":"Content-Type"
+      }
     }
   } 
 }
@@ -65,6 +77,6 @@ const checkRequestParameter = (httpMethod,params) => {
 const checkMailAddress = (mail) => {  
   const regExp = new RegExp('^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$');
   const result =  regExp.test(mail)
-  result || console.warn(`メールアドレスのチェック結果が不正です${mail}`)  
+  !result || console.warn(`メールアドレスのチェック結果が不正です${mail}`)  
   return result
 }
