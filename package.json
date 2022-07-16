@@ -4,7 +4,8 @@
   "description": "matroos",
   "main": "index.js",
   "scripts": {
-    "api": "netlify-lambda serve src --port 9001",
+    "dev": "netlify-lambda serve src --port 9001",
+    "debug": "netlify dev --debug",
     "build": "netlify-lambda build src"
   },
   "repository": {
