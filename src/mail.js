@@ -1,4 +1,5 @@
 require('dotenv').config();
+const querystring = require('querystring')
 const sgMail = require('@sendgrid/mail');
 
 exports.handler = async (event, _context) => {
