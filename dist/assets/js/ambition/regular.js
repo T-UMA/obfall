@@ -100,13 +100,19 @@ const sendMail = function(_event) {
       $('#loading').addClass('hidden');
       if (xhr.status === 200) {
         $('#name').val('');
+        $('#companyName').val('');
+        $('#tel').val('');
         $('#mail').val('');
+        $('#title').val('');
         $('#content').val('');
         $('#loading').addClass('hidden');
         alert('お問い合わせが完了しました。');
       } else {
         $('#name').val('');
+        $('#companyName').val('');
+        $('#tel').val('');
         $('#mail').val('');
+        $('#title').val('');
         $('#content').val('');
         $('#loading').addClass('hidden');
         alert('お問い合わせ中に予期せぬエラーが発生しました。');
@@ -114,7 +120,10 @@ const sendMail = function(_event) {
     })
     .catch((_e) => {
       $('#name').val('');
+      $('#companyName').val('');
+      $('#tel').val('');
       $('#mail').val('');
+      $('#title').val('');
       $('#content').val('');
       $('#loading').addClass('hidden');
       alert('お問い合わせ中に予期せぬエラーが発生しました。');
