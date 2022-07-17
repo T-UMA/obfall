@@ -32,7 +32,7 @@ exports.handler = async (event, _context) => {
   const tel = params.tel
   const replyTo = params.replyTo
   const title = params.title
-  const text = params.text
+  const text = params.text.replace('/\n/g','<br>');
   const content = 
   `
   <p>※このメールはシステムからの自動返信です</p>
