@@ -11,8 +11,11 @@ exports.handler = async (event, _context) => {
     console.warn(`リクエストデータの値が不正です。
     {
       httpMethod: ${httpMethod},
+      companyName: ${companyName},
+      name: ${name},
+      tel: ${tel},
       replyTo: ${params.replyTo},
-      name: ${params.name},
+      title: ${params.title},
       text: ${params.text}
     }`);
     return {
@@ -22,24 +25,39 @@ exports.handler = async (event, _context) => {
         "Access-Control-Allow-Headers":"Content-Type"
       }
     }
-  } 
+  }
+  const url = params.url
+  const companyName = params.companyName
   const name = params.name
+  const tel = params.tel
   const replyTo = params.replyTo
+  const title = params.title
   const text = params.text
   const content = 
   `
-  <p style="font-weight:bold">${name}さんからお問い合わせが来ました</p>
+  <p>※このメールはシステムからの自動返信です</p>
+  <p>${process.env.adminName}様</p>
+  <p>お世話になっております。</p>
+  <p>Matroos(URL: ${url})からお問い合わせを受け付けました</p>
+  <p>以下、ご確認お願い致します。</p>
   <br>
-  <p>以下はお問い合わせ内容です</p>
-  <hr>
-  <p>${text}</p>
-  <p>返信先：${replyTo}</p>
+  <p>━━━━━━□■□　お問い合わせ内容　□■□━━━━━━</p>
+  <p>会社名：${(companyName || companyName === '個人') ? 'なし（個人）' : companyName }</p>
+  <p>ご担当者名：${name}</p>
+  <p>電話番号：${tel}</p>
+  <p>メール：${replyTo}</p>
+  <p>サイトURL：${url}</p>
+  <br>
+  <p>お問い合わせ内容：${title}</p>
+  <p>お問い合わせ内容（詳細）：${text}</p>
+  <p>━━━━━━━━━━━━━━━━━━━━━━━━━━━━</p>
   `
+  
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   const msg = {
    to: process.env.MAIL_TO,
    from: process.env.MAIL_FROM,
-   subject: `${name}さんからお問い合わせがあります`,
+   subject: `Matroosのサイトよりお問い合わせがありました`,
    html:content
   };
   try {
@@ -56,8 +74,12 @@ exports.handler = async (event, _context) => {
     console.warn(`メール送信に失敗しました。
     {
       httpMethod: ${httpMethod},
+      url: ${params.url},
+      companyName: ${companyName},
+      name: ${name},
+      tel: ${tel},
       replyTo: ${params.replyTo},
-      name: ${params.name},
+      title: ${params.title},
       text: ${params.text}
     }`);
     return {
@@ -71,7 +93,14 @@ exports.handler = async (event, _context) => {
 }
 
 const checkRequestParameter = (httpMethod,params) => {
-  return httpMethod === 'POST' && params.name && params.text && checkMailAddress(params.replyTo)
+  return (
+    httpMethod === 'POST' && 
+    params.url &&
+    params.name && 
+    params.replyTo &&
+    params.title &&
+    params.text && 
+    checkMailAddress(params.replyTo))
 }
 
 const checkMailAddress = (mail) => {  

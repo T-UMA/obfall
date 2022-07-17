@@ -12,6 +12,9 @@ body {
 #profile-text {
     width:120px;
 }
+#submit:hover {
+    cursor:pointer;
+}
 
 /**
 * アニメーション関係
