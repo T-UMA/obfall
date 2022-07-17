@@ -38,11 +38,12 @@ exports.handler = async (event, _context) => {
   <p>※このメールはシステムからの自動返信です</p>
   <p>${process.env.ADMIN_NAME}様</p>
   <p>お世話になっております。</p>
-  <p>Matroos(URL: ${url})からお問い合わせを受け付けました</p>
+  <p>Matroosからお問い合わせを受け付けました</p>
+  <p>(URL: ${url})</p>
   <p>以下、ご確認お願い致します。</p>
   <br>
   <p>━━━━━━□■□　お問い合わせ内容　□■□━━━━━━</p>
-  <p>会社名：${(companyName || companyName === '個人') ? 'なし（個人）' : companyName }</p>
+  <p>会社名：${(!companyName || companyName === '個人') ? 'なし（個人）' : companyName }</p>
   <p>ご担当者名：${name}</p>
   <p>電話番号：${tel}</p>
   <p>メール：${replyTo}</p>
