@@ -20,8 +20,9 @@ body {
 
 .title_h1 {
     color:  #EFEFEF;
-    font-size: 2em;
-    line-height: 2em;
+    font-size: 1.5em;
+    vertical-align:baseline;
+    margin-left:30px;
 }
 
 .nameWrapper {
@@ -94,8 +95,6 @@ span {
 
     .listContainer {
         background: linear-gradient(to bottom, #FFCD9D, #404D5F);
-        position: fixed;
-        z-index: 80;
     }
 
 }
@@ -103,6 +102,7 @@ span {
 /*iphone*/
 @media (max-width: 670px ) {
     .title {
+        display:block;
         width:300px;
         margin: 0 auto;
     }
@@ -110,6 +110,7 @@ span {
     .title_h1 {
         font-size: 1.2em;
         line-height:1.2em;
+        margin-top:30px;
     }
 
     .nameWrapper {
@@ -131,7 +132,5 @@ span {
 
     .listContainer {
         background: linear-gradient(to bottom, #FFCD9D, #404D5F);
-        position: fixed;
-        z-index: 80;
     }
 }

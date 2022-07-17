@@ -34,7 +34,7 @@ const sendMail = function(_event) {
     const tel = $('#tel').val();
     const replyTo = $('#mail').val();
     const name = $('#name').val();
-    const title = $('#mailTitle').val();
+    const title = $('#title').val();
     const text = $('#content').val();
 
     const checkObj = checkForm(replyTo,title,name,text);
@@ -127,7 +127,7 @@ const checkForm = (replyTo,title,name,text) => {
   return {
     name: !!name,
     replyTo: result,
-    title: title,
+    title: !!title,
     text: !!text
   }
 }

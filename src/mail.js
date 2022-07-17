@@ -36,7 +36,7 @@ exports.handler = async (event, _context) => {
   const content = 
   `
   <p>※このメールはシステムからの自動返信です</p>
-  <p>${process.env.adminName}様</p>
+  <p>${process.env.ADMIN_NAME}様</p>
   <p>お世話になっております。</p>
   <p>Matroos(URL: ${url})からお問い合わせを受け付けました</p>
   <p>以下、ご確認お願い致します。</p>
