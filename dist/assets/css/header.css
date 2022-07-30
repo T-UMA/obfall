@@ -263,11 +263,13 @@ span {
 
 .headerwrapper {
   transform:translateX(102%);
-  transition: transform 0.3s ease-in;  
+  opacity: 0;
+  transition: all 0.3s ease-in;  
   z-index:101;
 }
 
 #menu-btn-check:checked ~ .headerwrapper {
   transform:translateX(0%);
+  opacity: 1;
 }
 
