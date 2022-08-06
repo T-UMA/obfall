@@ -6,6 +6,24 @@ body {
     font-weight: 500;
     font-size: 1em;
 }
+.section-title {
+    background:url("../img/underline-orange.png") bottom repeat-x; 
+}
+.ambition-image {
+    position: absolute;
+    top: -10%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    max-width: none!important;
+    min-height: 100%;
+    z-index:-1;
+}
+@media screen and (max-width: 640px){
+    .ambition-image {
+        top: 0%;
+        left: 110%;
+    }
+}
 #other-ambition li:hover {
     cursor:pointer;
 }

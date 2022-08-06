@@ -4,29 +4,21 @@
 }
 
 .footerwrapper {
-  padding: 10%;
-  display: flex;
-
+  padding: 10% 5%;
 }
-
-.footerwrapper :last-of-type{
-  margin-left: auto;
-}
-
 
 .footerlist a{
   line-height: 2em;
-
 }
-
 .footerlist {
-  border-left:0.5px solid #EFEFEF; /*線の設定*/
-  padding:5px 35px; /*余白の設定*/
+  padding:5px 0px 5px 35px; /*余白の設定*/
   font-size: 16px;
+  min-width:180px;
 }
 
 .companyname {
   font-size: 24px;
+  padding-right:1em ;
 }
 
 .footerlist :hover {

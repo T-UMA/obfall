@@ -33,27 +33,9 @@ body {
     margin: 0 auto;
 }
 
-.nameList {
-    display: flex;
-    align-items: flex-end;
-    margin: 30px 0;
-}
-
 .pic {
     width: 45px;
     transition: 0.5s;
-}
-
-.name {
-    display: flex;
-    font-size: 1.5em;
-    left: 18%;
-    color: #EFEFEF;
-    margin-left: -6%;
-}
-
-.eigo {
-    margin-left: 10px;
 }
 
 span {
@@ -79,14 +61,6 @@ span {
         width: 600px;
         margin: 0 auto;
         column-gap: 0em;
-    }
-
-    .nameList {
-        margin: 30px 30px 50px 0px;
-    }
-
-    .name {
-        font-size: 1.4em;
     }
 
     .pic {
@@ -117,15 +91,6 @@ span {
         margin: 0 auto;
         width: 300px;
     }
-
-    .nameList {
-        margin: 30px 0 30px 0;
-    }
-
-    .name {
-        font-size: 1.3em;
-    }
-
     .pic {
         width: 37px;
     }
