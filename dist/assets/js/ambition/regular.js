@@ -91,7 +91,7 @@ const sendMail = function(_event) {
       return
     }
     $('#loading').removeClass('hidden');
-    const URL = "https://startling-pie-3061ea.netlify.app/.netlify/functions/mail";
+    const URL = "https://matroos.tokyo/.netlify/functions/mail";
     return $.ajax({
       type: "POST",
       url: URL,
