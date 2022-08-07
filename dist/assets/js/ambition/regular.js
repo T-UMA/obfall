@@ -30,6 +30,7 @@ const toOtherPerson = function(index) {
 
 
 const sendMail = function(_event) {
+    const contactInfo = $('#contactInfo').val();
     const companyName = $('#companyName').val();
     const tel = $('#tel').val();
     const replyTo = $('#mail').val();
@@ -37,7 +38,15 @@ const sendMail = function(_event) {
     const title = $('#title').val();
     const text = $('#content').val();
 
-    const checkObj = checkForm(replyTo,title,name,text);
+    const checkObj = checkForm(replyTo,title,name,text,contactInfo);
+
+    if (!checkObj.contactInfo ) {
+      if (!$('#contact-info-error').length) {
+        $('#contactInfo').after('<p id="contact-info-error" class="text-red-500 mt-4 ml-2 text-xs">問い合わせ先のお名前を入力してください</p>');
+      }
+    } else if ($('#contact-info-error').length) {
+      $('#contact-info-error').remove();
+    };
 
     if (!checkObj.name ) {
       if (!$('#name-error').length) {
@@ -88,6 +97,7 @@ const sendMail = function(_event) {
       url: URL,
       data: JSON.stringify( {
         url: location.href,
+        contactInfo: contactInfo,
         companyName: companyName,
         name: name,
         tel: tel,
@@ -99,6 +109,7 @@ const sendMail = function(_event) {
     .done((_data,_status,xhr) => {
       $('#loading').addClass('hidden');
       if (xhr.status === 200) {
+        $('#contactInfo').val('');
         $('#name').val('');
         $('#companyName').val('');
         $('#tel').val('');
@@ -108,6 +119,7 @@ const sendMail = function(_event) {
         $('#loading').addClass('hidden');
         alert('お問い合わせが完了しました。');
       } else {
+        $('#contactInfo').val('');
         $('#name').val('');
         $('#companyName').val('');
         $('#tel').val('');
@@ -119,6 +131,7 @@ const sendMail = function(_event) {
       }
     })
     .catch((_e) => {
+      $('#contactInfo').val('');
       $('#name').val('');
       $('#companyName').val('');
       $('#tel').val('');
@@ -130,13 +143,14 @@ const sendMail = function(_event) {
     })
 }
 
-const checkForm = (replyTo,title,name,text) => {
+const checkForm = (replyTo,title,name,text,contactInfo) => {
   const regExp = new RegExp('^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$');
   const result =  regExp.test(replyTo);
   return {
     name: !!name,
     replyTo: result,
     title: !!title,
-    text: !!text
+    text: !!text,
+    contactInfo: !!contactInfo
   }
 }

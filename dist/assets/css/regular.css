@@ -6,22 +6,58 @@ body {
     font-weight: 500;
     font-size: 1em;
 }
-.section-title {
+.section-title-orange {
     background:url("../img/underline-orange.png") bottom repeat-x; 
+    background-size:150px;
+    background-color:rgba(255,255,255,0.6);
+    background-blend-mode:lighten;
+}
+.section-title-dark-orange {
+    background:url("../img/underline-dark-orange.png") bottom repeat-x; 
+    background-size:150px;
+    background-color:rgba(255,255,255,0.6);
+    background-blend-mode:lighten;
+}
+.section-title-blue {
+    background:url("../img/underline-blue.png") bottom repeat-x; 
+    background-size:150px;
+    background-color:rgba(255,255,255,0.6);
+    background-blend-mode:lighten;
+}
+.section-title-dark-blue {
+    background:url("../img/underline-dark-blue.png") bottom repeat-x; 
+    background-size:150px;
+    background-color:rgba(255,255,255,0.6);
+    background-blend-mode:lighten;
+}
+@media screen and (max-width: 640px) {
+    .section-title-orange,.section-title-dark-orange, .section-title-blue, .section-title-dark-blue {
+        background-size:100px;
+    }
 }
 .ambition-image {
     position: absolute;
-    top: -10%;
+    top:0%;
+    background-size:cover;
+    top:  20%;
     left: 50%;
     transform: translate(-50%,-50%);
-    max-width: none!important;
+    max-width: 120%!important;
     min-height: 100%;
     z-index:-1;
 }
+@media screen and (max-width: 1024px) {
+    .ambition-image {
+        top: 50%;
+        left: 50%;
+    }
+}
 @media screen and (max-width: 640px){
     .ambition-image {
-        top: 0%;
-        left: 110%;
+        max-width: none!important;
+        width: 640px;
+        top: 50%;
+        left: 50%;
     }
 }
 #other-ambition li:hover {

@@ -7,10 +7,19 @@ exports.handler = async (event, _context) => {
   body.replace('/\'/g',"\"");
   console.log(body);
   const params = JSON.parse(body);
+  const url = params.url
+  const contactInfo = params.contactInfo
+  const companyName = params.companyName
+  const name = params.name
+  const tel = params.tel
+  const replyTo = params.replyTo
+  const title = params.title
+  const text = params.text.replace(/\n/g,'<br>');
   if (!checkRequestParameter(httpMethod, params)) {
     console.warn(`リクエストデータの値が不正です。
     {
       httpMethod: ${httpMethod},
+      contactInfo: ${contactInfo},
       companyName: ${companyName},
       name: ${name},
       tel: ${tel},
@@ -26,13 +35,6 @@ exports.handler = async (event, _context) => {
       }
     }
   }
-  const url = params.url
-  const companyName = params.companyName
-  const name = params.name
-  const tel = params.tel
-  const replyTo = params.replyTo
-  const title = params.title
-  const text = params.text.replace(/\n/g,'<br>');
   const content = 
   `
   <p>※このメールはシステムからの自動返信です</p>
@@ -43,6 +45,7 @@ exports.handler = async (event, _context) => {
   <p>以下、ご確認お願い致します。</p>
   <br>
   <p>━━━━━━□■□　お問い合わせ内容　□■□━━━━━━</p>
+  <p>お問い合わせ先: ${contactInfo}</p>
   <p>会社名：${(!companyName || companyName === '個人') ? 'なし（個人）' : companyName }</p>
   <p>ご担当者名：${name}</p>
   <p>電話番号：${tel}</p>
@@ -79,6 +82,7 @@ exports.handler = async (event, _context) => {
     {
       httpMethod: ${httpMethod},
       url: ${params.url},
+      contactInfo: ${contactInfo}
       companyName: ${companyName},
       name: ${name},
       tel: ${tel},
@@ -100,6 +104,7 @@ const checkRequestParameter = (httpMethod,params) => {
   return (
     httpMethod === 'POST' && 
     params.url &&
+    params.contactInfo &&
     params.name && 
     params.replyTo &&
     params.title &&
