@@ -106,7 +106,7 @@ exports.handler = async (event, _context) => {
     text: content,
   };
 
-  transporter.sendMail(mailOptions, (err, response) => {
+  return transporter.sendMail(mailOptions, (err, response) => {
     console.log(err || response);
     if (!err) {
       console.log("メール送信が成功しました");
