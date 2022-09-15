@@ -1,19 +1,41 @@
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
+
+const checkRequestParameter = (httpMethod, params) => {
+  return (
+    httpMethod === "POST" &&
+    params.url &&
+    params.contactInfo &&
+    params.name &&
+    params.replyTo &&
+    params.title &&
+    params.text &&
+    checkMailAddress(params.replyTo)
+  );
+};
+
+const checkMailAddress = (mail) => {
+  const regExp = new RegExp(
+    "^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*.)+[a-zA-Z]{2,}$"
+  );
+  const result = regExp.test(mail);
+  result || console.warn(`メールアドレスのチェック結果が不正です${mail}`);
+  return result;
+};
 
 exports.handler = async (event, _context) => {
-  const {httpMethod} = event
-  let body = event.body
-  body.replace('/\'/g',"\"");
+  const { httpMethod } = event;
+  let body = event.body;
+  body.replace("/'/g", '"');
   console.log(body);
   const params = JSON.parse(body);
-  const url = params.url
-  const contactInfo = params.contactInfo
-  const companyName = params.companyName
-  const name = params.name
-  const tel = params.tel
-  const replyTo = params.replyTo
-  const title = params.title
-  const text = params.text.replace(/\n/g,'<br>');
+  const url = params.url;
+  const contactInfo = params.contactInfo;
+  const companyName = params.companyName;
+  const name = params.name;
+  const tel = params.tel;
+  const replyTo = params.replyTo;
+  const title = params.title;
+  const text = params.text.replace(/\n/g, "<br>");
   if (!checkRequestParameter(httpMethod, params)) {
     console.warn(`リクエストデータの値が不正です。
     {
@@ -27,12 +49,12 @@ exports.handler = async (event, _context) => {
       text: ${params.text}
     }`);
     return {
-      statusCode:400,
+      statusCode: 400,
       headers: {
-        "Access-Control-Allow-Origin":"*",
-        "Access-Control-Allow-Headers":"Content-Type"
-      }
-    }
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type",
+      },
+    };
   }
 
   //認証情報
@@ -51,8 +73,7 @@ exports.handler = async (event, _context) => {
 
   const transporter = nodemailer.createTransport(transport);
 
-  const content = 
-  `
+  const content = `
   <p>※このメールはシステムからの自動返信です</p>
   <p>${process.env.ADMIN_NAME}様</p>
   <p>お世話になっております。</p>
@@ -62,7 +83,9 @@ exports.handler = async (event, _context) => {
   <br>
   <p>━━━━━━□■□　お問い合わせ内容　□■□━━━━━━</p>
   <p>お問い合わせ先: ${contactInfo}</p>
-  <p>会社名：${(!companyName || companyName === '個人') ? 'なし（個人）' : companyName }</p>
+  <p>会社名：${
+    !companyName || companyName === "個人" ? "なし（個人）" : companyName
+  }</p>
   <p>ご担当者名：${name}</p>
   <p>電話番号：${tel}</p>
   <p>メール：${replyTo}</p>
@@ -74,10 +97,10 @@ exports.handler = async (event, _context) => {
   <p>${text}</p>
   <hr>
   <p>━━━━━━━━━━━━━━━━━━━━━━━━━━━━</p>
-  `
+  `;
 
   const mailOptions = {
-    from: 'matroos.tokyo@gmail.com',
+    from: "matroos.tokyo@gmail.com",
     to: process.env.MAIL_TO,
     subject: process.env.SUBJECT,
     text: content,
@@ -86,23 +109,23 @@ exports.handler = async (event, _context) => {
   transporter.sendMail(mailOptions, (err, response) => {
     console.log(err || response);
     if (!err) {
-      console.log('メール送信が成功しました');
+      console.log("メール送信が成功しました");
       return {
-        statusCode:200,
+        statusCode: 200,
         headers: {
-          "Access-Control-Allow-Origin":"*",
-          "Access-Control-Allow-Headers":"Content-Type"
-        }
-      }
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "Content-Type",
+        },
+      };
     } else {
-      console.warn('メール送信に失敗しました。');
+      console.warn("メール送信に失敗しました。");
       return {
-        statusCode:500,
+        statusCode: 500,
         headers: {
-          "Access-Control-Allow-Origin":"*",
-          "Access-Control-Allow-Headers":"Content-Type"
-        }
-      }
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "Content-Type",
+        },
+      };
     }
   });
-}
+};
