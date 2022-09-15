@@ -1,5 +1,4 @@
-require('dotenv').config();
-const sgMail = require('@sendgrid/mail');
+const nodemailer = require('nodemailer');
 
 exports.handler = async (event, _context) => {
   const {httpMethod} = event
@@ -35,6 +34,23 @@ exports.handler = async (event, _context) => {
       }
     }
   }
+
+  //認証情報
+  const auth = {
+    type: "OAuth2",
+    user: process.env.USER,
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    refreshToken: process.env.REFRESH_TOKEN,
+  };
+
+  const transport = {
+    service: "gmail",
+    auth,
+  };
+
+  const transporter = nodemailer.createTransport(transport);
+
   const content = 
   `
   <p>※このメールはシステムからの自動返信です</p>
@@ -59,62 +75,34 @@ exports.handler = async (event, _context) => {
   <hr>
   <p>━━━━━━━━━━━━━━━━━━━━━━━━━━━━</p>
   `
-  
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-  const msg = {
-   to: process.env.MAIL_TO,
-   from: process.env.MAIL_FROM,
-   subject: `Matroosのサイトよりお問い合わせがありました`,
-   html:content
+
+  const mailOptions = {
+    from: 'matroos.tokyo@gmail.com',
+    to: process.env.MAIL_TO,
+    subject: process.env.SUBJECT,
+    text: content,
   };
-  try {
-    await sgMail.send(msg);
-    console.warn("メール送信が成功しました");
-    return {
-      statusCode:200,
-      headers: {
-        "Access-Control-Allow-Origin":"*",
-        "Access-Control-Allow-Headers":"Content-Type"
+
+  transporter.sendMail(mailOptions, (err, response) => {
+    console.log(err || response);
+    if (!err) {
+      console.log('メール送信が成功しました');
+      return {
+        statusCode:200,
+        headers: {
+          "Access-Control-Allow-Origin":"*",
+          "Access-Control-Allow-Headers":"Content-Type"
+        }
+      }
+    } else {
+      console.warn('メール送信に失敗しました。');
+      return {
+        statusCode:500,
+        headers: {
+          "Access-Control-Allow-Origin":"*",
+          "Access-Control-Allow-Headers":"Content-Type"
+        }
       }
     }
-  } catch (error) {
-    console.warn(`メール送信に失敗しました。
-    {
-      httpMethod: ${httpMethod},
-      url: ${params.url},
-      contactInfo: ${contactInfo}
-      companyName: ${companyName},
-      name: ${name},
-      tel: ${tel},
-      replyTo: ${params.replyTo},
-      title: ${params.title},
-      text: ${params.text}
-    }`);
-    return {
-      statusCode:500,
-      headers: {
-        "Access-Control-Allow-Origin":"*",
-        "Access-Control-Allow-Headers":"Content-Type"
-      }
-    }
-  } 
-}
-
-const checkRequestParameter = (httpMethod,params) => {
-  return (
-    httpMethod === 'POST' && 
-    params.url &&
-    params.contactInfo &&
-    params.name && 
-    params.replyTo &&
-    params.title &&
-    params.text && 
-    checkMailAddress(params.replyTo))
-}
-
-const checkMailAddress = (mail) => {  
-  const regExp = new RegExp('^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$');
-  const result =  regExp.test(mail)
-  result || console.warn(`メールアドレスのチェック結果が不正です${mail}`)  
-  return result
+  });
 }
