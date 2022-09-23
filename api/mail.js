@@ -26,9 +26,9 @@ const checkMailAddress = (mail) => {
 exports.handler = async (event, _context) => {
   const { httpMethod } = event;
   let body = event.body;
-  body = decodeURIComponent(body).replace("/'/g", '"').replace(/&/g, "\",\"").replace(/=/g, "\":\"");
+  body = decodeURIComponent(body).replace("/'/g", '"');
   console.log('body: ',body);
-  const params = JSON.parse('{"' + body + '"}');
+  const params = JSON.parse(body);
   const url = params.url;
   const contactInfo = params.contactInfo;
   const companyName = params.companyName;
