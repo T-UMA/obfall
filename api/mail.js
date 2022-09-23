@@ -72,7 +72,6 @@ exports.handler = async (event, _context) => {
     service: "gmail",
     auth,
   };
-  console.log("メール設定オプション:", transport)
   const transporter = nodemailer.createTransport(transport);
 
   const content = `
@@ -109,29 +108,34 @@ exports.handler = async (event, _context) => {
   };
 
   let res;
-  transporter.sendMail(mailOptions, (err, response) => {
-    console.log(err || response);
-    if (!err) {
-      res = "success";
-      console.log("メール送信が成功しました");
-      return {
-        statusCode: 200,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Headers": "Content-Type",
-        },
-      };
-    } else {
-      res = "failed";
-      console.warn("メール送信に失敗しました。");
-      return {
-        statusCode: 500,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Headers": "Content-Type",
-        },
-      };
-    }
-  });
+  try {
+    transporter.sendMail(mailOptions, (err, response) => {
+        console.log(err || response);
+        if (!err) {
+          res = "success";
+          console.log("メール送信が成功しました");
+          return {
+            statusCode: 200,
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Headers": "Content-Type",
+            },
+          };
+        } else {
+          res = "failed";
+          console.warn("メール送信に失敗しました。");
+          return {
+            statusCode: 500,
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Headers": "Content-Type",
+            },
+          };
+        }
+      });
+  } catch (e) {
+    console.error(e)
+  }
+
 
 };
