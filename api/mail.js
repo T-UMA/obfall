@@ -111,8 +111,8 @@ exports.handler = async (event, _context) => {
   let res;
   try {
     console.log("メールを送信します")
-    transporter.sendMail(mailOptions, function (err, response) {
-        console.log(err || response);
+    transporter.sendMail(mailOptions, function (err, info) {
+        console.log(err || info);
         if (!err) {
           res = "success";
           console.log("メール送信が成功しました");
