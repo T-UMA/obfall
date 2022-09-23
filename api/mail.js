@@ -27,6 +27,7 @@ exports.handler = async (event, _context) => {
   const { httpMethod } = event;
   let body = event.body;
   body = body.replace("/'/g", '"');
+  console.log(event)
   console.log('body: ',body);
   const params = JSON.parse(body);
   const url = params.url;
