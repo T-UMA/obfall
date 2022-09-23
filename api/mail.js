@@ -108,33 +108,17 @@ exports.handler = async (event, _context) => {
     text: content,
   };
 
-  let res;
   try {
     console.log("メールを送信します")
-    transporter.sendMail(mailOptions, function (err, info) {
-        console.log(err || info);
-        if (!err) {
-          res = "success";
-          console.log("メール送信が成功しました");
-          return {
-            statusCode: 200,
-            headers: {
-              "Access-Control-Allow-Origin": "*",
-              "Access-Control-Allow-Headers": "Content-Type",
-            },
-          };
-        } else {
-          res = "failed";
-          console.warn("メール送信に失敗しました。");
-          return {
-            statusCode: 500,
-            headers: {
-              "Access-Control-Allow-Origin": "*",
-              "Access-Control-Allow-Headers": "Content-Type",
-            },
-          };
-        }
-      });
+    const response = await transporter.sendMail(mailOptions);
+    console.log(response)
+    return {
+        statusCode: 500,
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type",
+        },
+    };
   } catch (e) {
     console.error(e)
   }
