@@ -99,6 +99,7 @@ exports.handler = async (event, _context) => {
   <hr>
   <p>━━━━━━━━━━━━━━━━━━━━━━━━━━━━</p>
   `;
+  console.log("送信内容:",content)
 
   const mailOptions = {
     from: "matroos.tokyo@gmail.com",
@@ -109,7 +110,8 @@ exports.handler = async (event, _context) => {
 
   let res;
   try {
-    transporter.sendMail(mailOptions, (err, response) => {
+    console.log("メールを送信します")
+    transporter.sendMail(mailOptions, function (err, response) {
         console.log(err || response);
         if (!err) {
           res = "success";
