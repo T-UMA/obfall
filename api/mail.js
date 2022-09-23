@@ -70,7 +70,7 @@ exports.handler = async (event, _context) => {
 
   const transport = {
     service: "gmail",
-    auth,
+    auth: auth,
   };
   const transporter = nodemailer.createTransport(transport);
 
