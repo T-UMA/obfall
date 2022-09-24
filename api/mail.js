@@ -100,9 +100,10 @@ exports.handler = async (event, _context) => {
   <p>メール：${replyTo}</p>
   <p>サイトURL：${url}</p>
   <br>
-  <p>お問い合わせ内容：${title}</p>
-  <p>お問い合わせ内容（詳細）</p>
+  <p>件名：${title}</p>
   <hr>
+  <h2>お問い合わせ内容（詳細）</h2>
+  <br>
   <p>${text}</p>
   <hr>
   <p>━━━━━━━━━━━━━━━━━━━━━━━━━━━━</p>
@@ -118,11 +119,10 @@ exports.handler = async (event, _context) => {
 
   try {
     console.log("メールを送信します");
-    
     const response = await transporter.sendMail(mailOptions);
     console.log(response);
     return {
-      statusCode: 500,
+      statusCode: 200,
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "Content-Type",
@@ -130,5 +130,12 @@ exports.handler = async (event, _context) => {
     };
   } catch (e) {
     console.error(e);
+    return {
+        statusCode: 500,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "Content-Type",
+        },
+      };
   }
 };
