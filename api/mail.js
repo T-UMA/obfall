@@ -1,5 +1,6 @@
-require('dotenv').config();
+require("dotenv").config();
 const nodemailer = require("nodemailer");
+const { google } = require("googleapis");
 
 const checkRequestParameter = (httpMethod, params) => {
   return (
@@ -27,7 +28,7 @@ exports.handler = async (event, _context) => {
   const { httpMethod } = event;
   let body = event.body;
   body = decodeURIComponent(body).replace("/'/g", '"');
-  console.log('body: ',body);
+  console.log("body: ", body);
   const params = JSON.parse(body);
   const url = params.url;
   const contactInfo = params.contactInfo;
@@ -57,8 +58,15 @@ exports.handler = async (event, _context) => {
       },
     };
   }
-  console.log('リクエストデータ正常')
+  console.log("リクエストデータ正常");
 
+  const oAuth2Client = new google.auth.OAuth2(
+    process.env.CLIENT_ID,
+    process.env.CLIENT_SECRET,
+    process.env.REDIRECT_URI
+  );
+  oAuth2Client.setCredentials({ refresh_token: process.env.REFRESH_TOKEN });
+  const accessToken = await oAuth2Client.getAccessToken();
   //認証情報
   const auth = {
     type: "OAuth2",
@@ -66,8 +74,8 @@ exports.handler = async (event, _context) => {
     clientId: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
     refreshToken: process.env.REFRESH_TOKEN,
+    accessToken: accessToken
   };
-
   const transport = {
     service: "gmail",
     auth: auth,
@@ -99,29 +107,28 @@ exports.handler = async (event, _context) => {
   <hr>
   <p>━━━━━━━━━━━━━━━━━━━━━━━━━━━━</p>
   `;
-  console.log("送信内容:",content)
+  console.log("送信内容:", content);
 
   const mailOptions = {
     from: "matroos.tokyo@gmail.com",
     to: process.env.MAIL_TO,
     subject: process.env.SUBJECT,
-    text: content,
+    html: content,
   };
 
   try {
-    console.log("メールを送信します")
+    console.log("メールを送信します");
+    
     const response = await transporter.sendMail(mailOptions);
-    console.log(response)
+    console.log(response);
     return {
-        statusCode: 500,
-        headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Headers": "Content-Type",
-        },
+      statusCode: 500,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type",
+      },
     };
   } catch (e) {
-    console.error(e)
+    console.error(e);
   }
-
-
 };
