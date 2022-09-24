@@ -96,15 +96,13 @@ exports.handler = async (event, _context) => {
   }</p>
   <p>ご担当者名：${name}</p>
   <p>ご担当者電話番号：${tel}</p>
-  <p>返信先メールアドレス：${replyTo}</p>
-  <p>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</p>
+  <p>メールアドレス：${replyTo}</p>
   <br>
   <p>━━━━━━□■□　お問い合わせ内容　□■□━━━━━━</p>
   <p>問い合わせ先社員: ${contactInfo}</p>
   <h3>件名：${title}</h3>
   <h3>本文</h3>
   <p style="margin-left: 1em;">${text}</p>
-  <p>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</p>
   `;
   console.log("送信内容:", content);
 
