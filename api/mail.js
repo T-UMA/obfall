@@ -87,6 +87,7 @@ exports.handler = async (event, _context) => {
   <p>${process.env.ADMIN_NAME}様</p>
   <p>お世話になっております。</p>
   <p>Matroos社員紹介サイトよりお問い合わせを受け付けました</p>
+  <p>問い合わせ元URL: ${url}</p>
   <p>以下、ご確認お願い致します。</p>
   <br>
   <p>━━━━━━□■□　問い合わせた方の情報　□■□━━━━━━</p>
@@ -96,17 +97,14 @@ exports.handler = async (event, _context) => {
   <p>ご担当者名：${name}</p>
   <p>ご担当者電話番号：${tel}</p>
   <p>返信先メールアドレス：${replyTo}</p>
-  <hr>
+  <p>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</p>
   <br>
   <p>━━━━━━□■□　お問い合わせ内容　□■□━━━━━━</p>
-  <p>お問い合わせ先: ${contactInfo}</p>
-  <p>問い合わせのあったサイトURL：${url}</p>
-  <br>
+  <p>問い合わせ先社員: ${contactInfo}</p>
   <h3>件名：${title}</h3>
-  <h3>お問い合わせ内容</h3>
-  <br>
-  <p>${text}</p>
-  <hr>
+  <h3>本文</h3>
+  <p style="margin-left: 1em;">${text}</p>
+  <p>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</p>
   `;
   console.log("送信内容:", content);
 
