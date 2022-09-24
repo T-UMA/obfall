@@ -86,27 +86,27 @@ exports.handler = async (event, _context) => {
   <p>※このメールはシステムからの自動返信です</p>
   <p>${process.env.ADMIN_NAME}様</p>
   <p>お世話になっております。</p>
-  <p>Matroosからお問い合わせを受け付けました</p>
-  <p>(URL: ${url})</p>
+  <p>Matroos社員紹介サイトよりお問い合わせを受け付けました</p>
   <p>以下、ご確認お願い致します。</p>
   <br>
-  <p>━━━━━━□■□　お問い合わせ内容　□■□━━━━━━</p>
-  <p>お問い合わせ先: ${contactInfo}</p>
+  <p>━━━━━━□■□　問い合わせた方の情報　□■□━━━━━━</p>
   <p>会社名：${
     !companyName || companyName === "個人" ? "なし（個人）" : companyName
   }</p>
   <p>ご担当者名：${name}</p>
-  <p>電話番号：${tel}</p>
-  <p>メール：${replyTo}</p>
-  <p>サイトURL：${url}</p>
-  <br>
-  <p>件名：${title}</p>
+  <p>ご担当者電話番号：${tel}</p>
+  <p>返信先メールアドレス：${replyTo}</p>
   <hr>
-  <h2>お問い合わせ内容（詳細）</h2>
+  <br>
+  <p>━━━━━━□■□　お問い合わせ内容　□■□━━━━━━</p>
+  <p>お問い合わせ先: ${contactInfo}</p>
+  <p>問い合わせのあったサイトURL：${url}</p>
+  <br>
+  <h3>件名：${title}</h3>
+  <h3>お問い合わせ内容</h3>
   <br>
   <p>${text}</p>
   <hr>
-  <p>━━━━━━━━━━━━━━━━━━━━━━━━━━━━</p>
   `;
   console.log("送信内容:", content);
 
