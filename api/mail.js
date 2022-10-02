@@ -90,7 +90,7 @@ exports.handler = async (event, _context) => {
   <p>問い合わせ元URL: ${url}</p>
   <p>以下、ご確認お願い致します。</p>
   <br>
-  <p>━━━━━━□■□　問い合わせた方の情報　□■□━━━━━━</p>
+  <p>━━━□■□　問い合わせた方の情報　□■□━━━</p>
   <p>会社名：${
     !companyName || companyName === "個人" ? "なし（個人）" : companyName
   }</p>
@@ -98,10 +98,9 @@ exports.handler = async (event, _context) => {
   <p>ご担当者電話番号：${tel}</p>
   <p>メールアドレス：${replyTo}</p>
   <br>
-  <p>━━━━━━□■□　お問い合わせ内容　□■□━━━━━━</p>
+  <p>━━━□■□　お問い合わせ内容　□■□━━━</p>
   <p>問い合わせ先社員: ${contactInfo}</p>
-  <h3>件名：${title}</h3>
-  <h3>本文</h3>
+  <p>件名：${title}</p>
   <p style="margin-left: 1em;">${text}</p>
   `;
   console.log("送信内容:", content);
