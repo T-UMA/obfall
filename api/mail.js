@@ -60,27 +60,17 @@ exports.handler = async (event, _context) => {
   }
   console.log("リクエストデータ正常");
 
-  const oAuth2Client = new google.auth.OAuth2(
-    process.env.CLIENT_ID,
-    process.env.CLIENT_SECRET,
-    process.env.REDIRECT_URI
-  );
-  oAuth2Client.setCredentials({ refresh_token: process.env.REFRESH_TOKEN });
-  const accessToken = await oAuth2Client.getAccessToken();
   //認証情報
-  const auth = {
-    type: "OAuth2",
-    user: process.env.USER,
-    clientId: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
-    refreshToken: process.env.REFRESH_TOKEN,
-    accessToken: accessToken
-  };
-  const transport = {
+  const transporter = nodemailer.createTransport({
     service: "gmail",
-    auth: auth,
-  };
-  const transporter = nodemailer.createTransport(transport);
+    port: 465,
+    secure: true,
+    auth: {
+      // メールアドレス
+      user: process.env.USER,
+      pass: process.env.PASSWORD,
+    },
+  });
 
   const content = `
   <p>※このメールはシステムからの自動返信です</p>
