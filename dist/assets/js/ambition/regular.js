@@ -91,7 +91,7 @@ const sendMail = function(_event) {
       return
     }
     $('#loading').removeClass('hidden');
-    const URL = "https://www.matroos.tokyo/.netlify/functions/mail";
+    const URL = "https://matroos.tokyo/.netlify/functions/mail";
     return $.ajax({
       type: "POST",
       url: URL,
