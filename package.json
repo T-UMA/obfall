@@ -1,20 +1,20 @@
 {
-  "name": "matroos",
+  "name": "obfall",
   "version": "1.0.0",
-  "description": "matroos",
+  "description": "obfall",
   "main": "index.js",
   "scripts": {
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NakamuraHiroki2465/matroos.git"
+    "url": "git+https://github.com/T-UMA/obfall.git"
   },
   "author": "nakamura hiroki",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/NakamuraHiroki2465/matroos/issues"
+    "url": "https://github.com/T-UMA/obfall/issues"
   },
-  "homepage": "https://github.com/NakamuraHiroki2465/matroos#readme",
+  "homepage": "https://github.com/T-UMA/obfall#readme",
   "dependencies": {
     "autoprefixer": "^10.4.7",
     "axios": "^0.27.2",

@@ -96,7 +96,7 @@ exports.handler = async (event, _context) => {
   console.log("送信内容:", content);
 
   const mailOptions = {
-    from: "matroos.tokyo@gmail.com",
+    from: "obfall0704@gmail.com",
     to: process.env.MAIL_TO,
     subject: process.env.SUBJECT,
     html: content,
